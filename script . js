@@ -1,0 +1,43 @@
+const ipInput = document.getElementById("ipInput");
+const checkButton = document.getElementById("checkIP");
+const result = document.getElementById("ipResult");
+
+checkButton.addEventListener("click", function () {
+
+    const ip = ipInput.value.trim();
+
+    if (isValidIPv4(ip)) {
+        result.textContent = "✅ Valid IPv4 address";
+    } else {
+        result.textContent = "❌ Invalid IPv4 address";
+    }
+
+});
+
+function isValidIPv4(ip) {
+
+    const parts = ip.split(".");
+
+    if (parts.length !== 4) {
+        return false;
+    }
+
+    for (let part of parts) {
+
+        if (part === "") {
+            return false;
+        }
+
+        if (!/^\d+$/.test(part)) {
+            return false;
+        }
+
+        const number = Number(part);
+
+        if (number < 0 || number > 255) {
+            return false;
+        }
+    }
+
+    return true;
+}
