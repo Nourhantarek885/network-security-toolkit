@@ -66,3 +66,23 @@ button {
 
     font-weight: bold;
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #475569;
+    text-align: center;
+}
+
+th {
+    background: #334155;
+}
+
+td {
+    background: #1e293b;
+}
