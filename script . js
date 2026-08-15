@@ -3,7 +3,6 @@ const checkButton = document.getElementById("checkIP");
 const result = document.getElementById("ipResult");
 
 checkButton.addEventListener("click", function () {
-
     const ip = ipInput.value.trim();
     const parts = ip.split(".");
 
@@ -13,7 +12,6 @@ checkButton.addEventListener("click", function () {
     }
 
     for (let part of parts) {
-
         if (part === "" || !/^\d+$/.test(part)) {
             result.textContent = "❌ Invalid IPv4 address";
             return;
