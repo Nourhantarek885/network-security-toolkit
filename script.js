@@ -73,3 +73,23 @@ checkSubnet.addEventListener("click", function () {
 
     subnetResult.textContent = "✅ Valid subnet mask";
 });
+const cidrInput = document.getElementById("cidrInput");
+const calculateCIDR = document.getElementById("calculateCIDR");
+const cidrResult = document.getElementById("cidrResult");
+
+if (calculateCIDR) {
+    calculateCIDR.addEventListener("click", function () {
+
+        const cidr = Number(cidrInput.value);
+
+        if (!Number.isInteger(cidr) || cidr < 0 || cidr > 32) {
+            cidrResult.textContent = "❌ Enter a CIDR between 0 and 32";
+            return;
+        }
+
+        const totalAddresses = 2 ** (32 - cidr);
+
+        cidrResult.textContent =
+            `✅ /${cidr} = ${totalAddresses.toLocaleString()} total addresses`;
+    });
+}
