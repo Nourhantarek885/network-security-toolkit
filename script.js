@@ -41,3 +41,35 @@ checkPort.addEventListener("click", function () {
 
     portResult.textContent = "✅ Valid port number";
 });
+const subnetInput = document.getElementById("subnetInput");
+const checkSubnet = document.getElementById("checkSubnet");
+const subnetResult = document.getElementById("subnetResult");
+
+checkSubnet.addEventListener("click", function () {
+    const subnet = subnetInput.value.trim();
+    const parts = subnet.split(".");
+
+    if (parts.length !== 4) {
+        subnetResult.textContent = "❌ Invalid subnet mask";
+        return;
+    }
+
+    const numbers = parts.map(Number);
+
+    if (parts.some(part => !/^\d+$/.test(part)) ||
+        numbers.some(number => number < 0 || number > 255)) {
+        subnetResult.textContent = "❌ Invalid subnet mask";
+        return;
+    }
+
+    const binary = numbers
+        .map(number => number.toString(2).padStart(8, "0"))
+        .join("");
+
+    if (!/^1*0*$/.test(binary)) {
+        subnetResult.textContent = "❌ Invalid subnet mask";
+        return;
+    }
+
+    subnetResult.textContent = "✅ Valid subnet mask";
+});
