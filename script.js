@@ -93,3 +93,39 @@ if (calculateCIDR) {
             `✅ /${cidr} = ${totalAddresses.toLocaleString()} total addresses`;
     });
 }
+const classIPInput = document.getElementById("classIPInput");
+const checkClass = document.getElementById("checkClass");
+const classResult = document.getElementById("classResult");
+
+if (checkClass) {
+    checkClass.addEventListener("click", function () {
+
+        const ip = classIPInput.value.trim();
+        const parts = ip.split(".");
+
+        if (
+            parts.length !== 4 ||
+            parts.some(part => !/^\d+$/.test(part)) ||
+            parts.some(part => Number(part) < 0 || Number(part) > 255)
+        ) {
+            classResult.textContent = "❌ Invalid IPv4 address";
+            return;
+        }
+
+        const firstOctet = Number(parts[0]);
+
+        if (firstOctet >= 1 && firstOctet <= 126) {
+            classResult.textContent = "✅ Class A";
+        } else if (firstOctet >= 128 && firstOctet <= 191) {
+            classResult.textContent = "✅ Class B";
+        } else if (firstOctet >= 192 && firstOctet <= 223) {
+            classResult.textContent = "✅ Class C";
+        } else if (firstOctet >= 224 && firstOctet <= 239) {
+            classResult.textContent = "ℹ️ Class D (Multicast)";
+        } else if (firstOctet >= 240 && firstOctet <= 255) {
+            classResult.textContent = "ℹ️ Class E (Experimental)";
+        } else {
+            classResult.textContent = "ℹ️ Special/Reserved address";
+        }
+    });
+}
