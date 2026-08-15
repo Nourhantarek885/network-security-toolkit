@@ -86,3 +86,17 @@ th {
 td {
     background: #1e293b;
 }
+.about {
+    background: #1e293b;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+.about h2 {
+    margin-top: 0;
+}
+
+.about p {
+    line-height: 1.6;
+}
